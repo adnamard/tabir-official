@@ -1,10 +1,12 @@
 import TabirIdb from '../utils/db';
 
+const BASE_URL = process.env.API_BASE_URL;
+
 class RegisterPresenter {
     async register({ name, email, password }) {
         try {
             // First, register the user
-            const registerResponse = await fetch('https://tabir-backend-service-production.up.railway.app/users', {
+            const registerResponse = await fetch(`${BASE_URL}/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -17,7 +19,7 @@ class RegisterPresenter {
             switch (registerResponse.status) {
                 case 201:
                     // If registration successful, proceed with login
-                    const loginResponse = await fetch('https://tabir-backend-service-production.up.railway.app/authentications', {
+                    const loginResponse = await fetch(`${BASE_URL}/authentications`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -55,4 +57,4 @@ class RegisterPresenter {
     }
 }
 
-export default RegisterPresenter; 
+export default RegisterPresenter;

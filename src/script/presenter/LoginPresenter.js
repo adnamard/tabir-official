@@ -1,9 +1,11 @@
 import TabirIdb from '../utils/db';
 
+const BASE_URL = process.env.API_BASE_URL;
+
 class LoginPresenter {
     async login({ email, password }) {
         try {
-            const response = await fetch('https://tabir-backend-service-production.up.railway.app/authentications', {
+            const response = await fetch(`${BASE_URL}/authentications`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,4 +43,4 @@ class LoginPresenter {
     }
 }
 
-export default LoginPresenter; 
+export default LoginPresenter;
