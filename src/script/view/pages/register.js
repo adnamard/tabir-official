@@ -1,4 +1,5 @@
 import RegisterPresenter from '../../presenter/RegisterPresenter';
+import Swal from 'sweetalert2';
 
 const Register = {
   render() {
@@ -98,10 +99,21 @@ const Register = {
         const result = await response.json();
 
         if (response.ok) {
-          alert(result.message || 'Registrasi berhasil!');
+          Swal.fire({
+            title: 'Berhasil Registrasi!',
+            text: result.message,
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false,
+          });
           window.location.hash = '#/login';
         } else {
-          alert(result.message || 'Gagal registrasi.');
+          Swal.fire({
+            title: 'Gagal Registrasi',
+            text: result.message,
+            icon: 'error',
+            showConfirmButton: true,
+          });
         }
       } catch (err) {
         console.error('Error:', err);

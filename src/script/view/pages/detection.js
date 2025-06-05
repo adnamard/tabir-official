@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 const Detection = {
     // Constants
     MODEL_PATH: './models/sign_language/model.json',
@@ -46,7 +48,7 @@ const Detection = {
                             <div class="bg-[#7A8052] text-white p-6 rounded-lg">
                                 <h2 class="text-xl font-semibold mb-4">Live Camera</h2>
                                 <div class="aspect-video bg-gray-800 rounded-lg overflow-hidden mb-4">
-                                    <video id="videoInput" style="opacity: 0; position: absolute;"></video>
+                                    <video id="videoInput" style="opacity: 0; position: absolute; pointer-events: none"></video>
                                     <canvas id="webcam" class="w-full h-full object-contain"></canvas>
                                 </div>
                                 <div class="flex gap-4">
@@ -113,8 +115,26 @@ const Detection = {
         this.onHandsResults = this.onHandsResults.bind(this);
 
         // Add event listeners
-        this.elements.startButton.addEventListener('click', this.startDetection);
-        this.elements.stopButton.addEventListener('click', this.stopDetection);
+        this.elements.startButton.addEventListener('click', () => {
+            this.startDetection();
+        });
+        this.elements.stopButton.addEventListener('click', () => {
+            Swal.mixin({
+                toast: true,
+                position: "bottom-right",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+                }
+            }).fire({
+                icon: "warning",
+                title: "Deteksi dihentikan",
+            });
+            this.stopDetection();
+        });
         this.elements.backBtn.addEventListener('click', () => {
             this.stopDetection();
             window.location.hash = '#/dashboard';
@@ -260,7 +280,7 @@ const Detection = {
         this.elements.stopButton.disabled = true;
         this.elements.canvasCtx.clearRect(0, 0, this.elements.canvasElement.width, this.elements.canvasElement.height);
         this.elements.outputText.value = "";
-        this.elements.loadingStatus.innerText = 'Deteksi dihentikan.';
+        this.elements.loadingStatus.innerText = 'Deteksi dihentikan. Tekan Mulai Deteksi jika ingin mendeteksi lagi';
 
         // Reset state
         this.state.predQueue = [];

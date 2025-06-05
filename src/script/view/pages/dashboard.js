@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import TabirIdb from '../../utils/db';
 
 const Dashboard = {
@@ -79,16 +80,35 @@ const Dashboard = {
         const activityList = document.getElementById('activityList');
 
         // Logout handler
-        logoutBtn?.addEventListener('click', () => {
-            // Clear all auth data
-            localStorage.removeItem('auth_token');
-            localStorage.removeItem('user_data'); // If you store any user data
+        logoutBtn?.addEventListener('click', async (event) => {
+            event.preventDefault();
+            const logoutModal = await Swal.fire({
+                icon: 'warning',
+                title: 'Anda yakin ingin keluar?',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, keluar',
+                cancelButtonText: 'batal',
+                reverseButtons: true,
+            });
 
-            // Redirect to home
-            window.location.hash = '#/';
+            if (logoutModal.isConfirmed) {
+                // Clear all auth data
+                localStorage.removeItem('auth_token');
+                localStorage.removeItem('user_data'); // If you store any user data
 
-            // Optional: Reload the page to clear any cached data
-            window.location.reload();
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil keluar',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+
+                // Redirect to home
+                window.location.hash = '#/';
+
+                // Optional: Reload the page to clear any cached data
+                window.location.reload();
+            }
         });
 
         // File upload handler

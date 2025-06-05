@@ -1,4 +1,5 @@
 import LoginPresenter from '../../presenter/LoginPresenter';
+import Swal from 'sweetalert2';
 
 const Login = {
     render() {
@@ -78,12 +79,31 @@ const Login = {
                     // Store the authentication token
                     localStorage.setItem('auth_token', result.data.accessToken);
 
+                    Swal.mixin({
+                      toast: true,
+                      position: "bottom-right",
+                      showConfirmButton: false,
+                      timer: 3000,
+                      timerProgressBar: true,
+                      didOpen: (toast) => {
+                          toast.onmouseenter = Swal.stopTimer;
+                          toast.onmouseleave = Swal.resumeTimer;
+                      }
+                    }).fire({
+                      icon: "success",
+                      title: "Berhasil Login!",
+                    });
                     // Use setTimeout to ensure token is stored before redirect
                     setTimeout(() => {
                         window.location.hash = '#/dashboard';
                     }, 100);
                 } else {
-                    alert(result.message || 'Gagal Login.');
+                    Swal.fire({
+                      title: 'Gagal Login',
+                      text: result.message,
+                      icon: 'error',
+                      showConfirmButton: true,
+                    });
                 }
             } catch (err) {
                 console.error('Error:', err);
