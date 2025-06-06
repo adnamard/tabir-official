@@ -32,7 +32,7 @@ const Home = {
         </nav>
       </header>
 
-      <section class="bg-[#FAF5E5]">
+      <section class="bg-[#FAF5E5] -mt-12">
         <div class="container mx-auto min-h-screen flex flex-col-reverse md:flex-row justify-center items-center gap-4 md:gap-12 text-center md:text-left px-4">
           <div class="w-full md:w-2/6">
             <h3 class="text-3xl my-5 md:text-5xl font-bold text-[#013366] md:leading-tight">
@@ -41,12 +41,13 @@ const Home = {
               Communication
             </h3>
             <p class="text-md text-balance text-[#013366]">TaBir (Tangan Bicara) uses AI to interpret sign language, making communication more accessible for everyone</p>
-            <div class="text-white mt-6 flex justify-center md:justify-start gap-2">
-              <button class="bg-[#7A8052] px-2 py-1 rounded-md hover:scale-105 transition-transform">Upload Video</button>
-              <button class="bg-[#4A708B] px-2 py-1 rounded-md hover:scale-105 transition-transform">Use Camera</button>
+            <div class="text-white mt-4 flex justify-center md:justify-start gap-2">
+              <button class="bg-[#4A708B] px-2 py-1 rounded-md hover:scale-105 transition-transform flex items-center gap-2">
+                <img src="../img/use-camera.png" alt="camera-icon" class="w-5 h-5" />
+              Use Camera</button>
             </div>
           </div>
-          <img src="../img/logo.png" class="w-1/2 lg:w-1/4 lg:mb-0" />
+          <img src="../img/tabir-page1.png" class="w-1/2 lg:w-1/4 lg:mb-0" />
         </div>
       </section>
 
@@ -63,14 +64,6 @@ const Home = {
                 <h1 class="text-lg font-semibold text-[#4A708B]">Real-Time Recognition</h1>
               </div>
               <p class="text-sm text-[#7AA2B2] text-center md:text-left">Instanly interprets sign language gestures through your webcam</p>
-            </div>
-
-            <div class="flex flex-col items-start space-y-2 my-6">
-              <div class="flex items-center space-x-2 justify-center md:justify-start">
-                <img src="../img/video-upload.png">
-                <h1 class="text-lg font-semibold text-[#4A708B]">Video Upload</h1>
-              </div>
-              <p class="text-sm text-[#7AA2B2] text-center md:text-left">Process pre-recorded sign language videos</p>
             </div>
 
             <div class="flex flex-col items-start space-y-2 my-6">
@@ -108,9 +101,8 @@ const Home = {
         <div class="container mx-auto min-h-screen flex flex-col md:flex-row justify-center items-center md:gap-12 px-4 text-center md:text-left">
           <div class="w-full md:w-2/6">
             <img src="../img/camera-prev.png" class="mb-3 mx-auto md:mx-0">
-            <div class="flex flex-col md:flex-row justify-center md:justify-between gap-4">
+            <div class="flex flex-col md:flex-row justify-center md:justify-center gap-4">
               <button class="bg-[#8B9368] px-16 py-3 rounded-lg text-white text-xl font-bold">Capture</button>
-              <button class="bg-[#4A708B] px-16 py-3 rounded-lg text-white text-xl font-bold">Upload</button>
             </div>
           </div>
           <div class="w-full md:w-2/4 md:mt-0">
@@ -152,60 +144,84 @@ const Home = {
             <div class="flex w-[200%] animate-slide-group">
               <div class="flex w-1/2 justify-center gap-4 md:gap-10">
                 <div class="bg-[#FAF5E5] rounded-xl px-4 md:px-6 shadow-md w-60 md:w-72">
-                  <div class="bg-[#8B9368] h-40 md:h-52 mb-4"></div>
-                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Player One</h3>
+                  <img src="../img/profile-berwyn.jpeg" alt="foto-profile" class="h-40 w-full object-cover md:h-52 mb-4">
+                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Berwyn Izzut Taghyir</h3>
                   <p class="text-[#8B9368] text-sm mb-4 text-left">Machine Learning</p>
                   <div class="flex space-x-4 mt-8 md:mt-12 mb-6">
-                    <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
-                    <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    <a href="https://www.linkedin.com/in/wynzit/" target="_blank">
+                      <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
+                    <a href="https://github.com/Wynnzzz" target="_blank">
+                      <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
                   </div>
                 </div>
                 <div class="bg-[#FAF5E5] rounded-xl px-4 md:px-6 shadow-md w-60 md:w-72">
-                  <div class="bg-[#7AA2B2] h-40 md:h-52 mb-4"></div>
-                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Player Two</h3>
+                  <img src="../img/profile-fatwa.jpeg" alt="foto-profile" class="h-40 w-full object-cover md:h-52 mb-4">
+                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Fatwa Nurhidayat</h3>
                   <p class="text-[#8B9368] text-sm mb-4 text-left">Machine Learning</p>
                   <div class="flex space-x-4 mt-8 md:mt-12 mb-6">
-                    <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
-                    <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    <a href="https://www.linkedin.com/in/fatwanurhdyt/" target="_blank">
+                      <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
+                    <a href="https://github.com/wafflenuts444" target="_blank">
+                      <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
                   </div>
                 </div>
                 <div class="bg-[#FAF5E5] rounded-xl px-4 md:px-6 shadow-md w-60 md:w-72">
-                  <div class="bg-[#E7BD87] h-40 md:h-52 mb-4"></div>
-                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Player Three</h3>
+                  <img src="../img/profile-agil.jpg" alt="foto-profile" class="h-40 w-full object-cover md:h-52 mb-4">
+                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Agil Julian Nugroho</h3>
                   <p class="text-[#8B9368] text-sm mb-4 text-left">Machine Learning</p>
                   <div class="flex space-x-4 mt-8 md:mt-12 mb-6">
-                    <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
-                    <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    <a href="https://www.linkedin.com/in/agil-julian-nugroho-98497b24b/" target="_blank">
+                      <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
+                    <a href="https://github.com/AJN276" target="_blank">
+                      <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
                   </div>
                 </div>
               </div>
 
               <div class="flex w-1/2 justify-center gap-4 md:gap-10">
                 <div class="bg-[#FAF5E5] rounded-xl px-4 md:px-6 shadow-md w-60 md:w-72">
-                  <div class="bg-[#A3D8F4] h-40 md:h-52 mb-4"></div>
-                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Player Four</h3>
-                  <p class="text-[#8B9368] text-sm mb-4 text-left">Frontend</p>
+                  <img src="../img/profile-arya.jpeg" alt="foto-profile" class="h-40 w-full object-cover md:h-52 mb-4">
+                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Arya Rizki Andaru</h3>
+                  <p class="text-[#8B9368] text-sm mb-4 text-left">Frontend & Backend</p>
                   <div class="flex space-x-4 mt-8 md:mt-12 mb-6">
-                    <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
-                    <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    <a href="https://www.linkedin.com/in/aryarizkiandaru/" target="_blank">
+                      <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
+                    <a href="https://github.com/xryar" target="_blank">
+                      <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
                   </div>
                 </div>
                 <div class="bg-[#FAF5E5] rounded-xl px-4 md:px-6 shadow-md w-60 md:w-72">
-                  <div class="bg-[#C4A69F] h-40 md:h-52 mb-4"></div>
-                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Player Five</h3>
-                  <p class="text-[#8B9368] text-sm mb-4 text-left">Backend</p>
+                  <img src="../img/profile-dea.jpeg" alt="foto-profile" class="h-40 w-full object-cover md:h-52 mb-4">
+                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Dea Ramanda</h3>
+                  <p class="text-[#8B9368] text-sm mb-4 text-left">Frontend & Backend</p>
                   <div class="flex space-x-4 mt-8 md:mt-12 mb-6">
-                    <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
-                    <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    <a href="https://www.linkedin.com/in/adnamard/" target="_blank">
+                      <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
+                    <a href="https://github.com/adnamard" target="_blank">
+                      <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
                   </div>
                 </div>
                 <div class="bg-[#FAF5E5] rounded-xl px-4 md:px-6 shadow-md w-60 md:w-72">
-                  <div class="bg-[#F2D388] h-40 md:h-52 mb-4"></div>
-                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Player Six</h3>
-                  <p class="text-[#8B9368] text-sm mb-4 text-left">UI Designer</p>
+                  <img src="../img/profile-reza.jpeg" alt="foto-profile" class="h-40 w-full object-cover md:h-52 mb-4">
+                  <h3 class="text-[#4A708B] font-bold text-lg text-left">Reza Nugraha</h3>
+                  <p class="text-[#8B9368] text-sm mb-4 text-left">Frontend & Backend</p>
                   <div class="flex space-x-4 mt-8 md:mt-12 mb-6">
-                    <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
-                    <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    <a href="https://www.linkedin.com/in/rezanugraha105/" target="_blank">
+                      <img src="../img/linkedin.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
+                    <a href="https://github.com/rezanugraha105/" target="_blank">
+                      <img src="../img/github.png" class="w-8 md:w-10 h-8 md:h-10">
+                    </a>
                   </div>
                 </div>
               </div>
