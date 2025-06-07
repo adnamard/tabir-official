@@ -61,54 +61,39 @@ const Login = {
         const form = document.getElementById('loginForm');
 
         form?.addEventListener('submit', async (e) => {
-            e.preventDefault();
+          e.preventDefault();
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+          const presenter = new LoginPresenter();
 
-            try {
-                const response = await fetch('https://tabir-backend-service-production.up.railway.app/authentications', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password }),
-                });
+          try {
+            const success = await presenter.login({ username, password });
 
-                const result = await response.json();
-
-                if (response.ok && result.data?.accessToken) {
-                    // Store the authentication token
-                    localStorage.setItem('auth_token', result.data.accessToken);
-
-                    Swal.mixin({
-                      toast: true,
-                      position: "bottom-right",
-                      showConfirmButton: false,
-                      timer: 3000,
-                      timerProgressBar: true,
-                      didOpen: (toast) => {
-                          toast.onmouseenter = Swal.stopTimer;
-                          toast.onmouseleave = Swal.resumeTimer;
-                      }
-                    }).fire({
-                      icon: "success",
-                      title: "Berhasil Login!",
-                    });
-                    // Use setTimeout to ensure token is stored before redirect
-                    setTimeout(() => {
-                        window.location.hash = '#/dashboard';
-                    }, 100);
-                } else {
-                    Swal.fire({
-                      title: 'Gagal Login',
-                      text: result.message,
-                      icon: 'error',
-                      showConfirmButton: true,
-                    });
-                }
-            } catch (err) {
-                console.error('Error:', err);
-                alert('Gagal menghubungi server.');
+            if (success){
+              Swal.mixin({
+              toast: true,
+              position: "bottom-right",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                  toast.onmouseenter = Swal.stopTimer;
+                  toast.onmouseleave = Swal.resumeTimer;
+              }
+            }).fire({
+              icon: "success",
+              title: "Berhasil Login!",
+            });
             }
+          } catch (error) {
+            Swal.fire({
+              title: 'Login Gagal',
+              text: error.message || 'Terjadi kesalahan saat login.',
+              icon: 'error',
+            });
+          }
+
         });
     },
 };

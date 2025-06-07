@@ -86,39 +86,27 @@ const Register = {
       const fullname = document.getElementById('fullname').value;
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
+      const presenter = new RegisterPresenter();
 
       try {
-        const response = await fetch('https://tabir-backend-service-production.up.railway.app/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ fullname, username, password }),
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
+        const success = await presenter.register({fullname, username, password });
+        if (success) {
           Swal.fire({
             title: 'Berhasil Registrasi!',
-            text: result.message,
             icon: 'success',
             timer: 2000,
             showConfirmButton: false,
           });
-          window.location.hash = '#/login';
-        } else {
-          Swal.fire({
+        }
+      } catch (error) {
+        Swal.fire({
             title: 'Gagal Registrasi',
-            text: result.message,
+            text: error.message || 'Terjadi kesalahan dalam registrasi',
             icon: 'error',
             showConfirmButton: true,
           });
-        }
-      } catch (err) {
-        console.error('Error:', err);
-        alert('Gagal menghubungi server.');
       }
+      
     });
   },
 };
