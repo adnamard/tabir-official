@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import ResultPresenter from "../../presenter/ResultPresenter";
 
 const Detection = {
     // Constants
@@ -118,7 +119,14 @@ const Detection = {
         this.elements.startButton.addEventListener('click', () => {
             this.startDetection();
         });
-        this.elements.stopButton.addEventListener('click', () => {
+        this.elements.stopButton.addEventListener('click', async () => {
+            const currentText = this.elements.outputText.value.trim();
+            const presenter = new ResultPresenter();
+
+            if (currentText) {
+                await presenter.postPredictions(currentText);
+            }
+
             Swal.mixin({
                 toast: true,
                 position: "bottom-right",
@@ -135,7 +143,14 @@ const Detection = {
             });
             this.stopDetection();
         });
-        this.elements.backBtn.addEventListener('click', () => {
+        this.elements.backBtn.addEventListener('click', async () => {
+            const currentText = this.elements.outputText.value.trim();
+            const presenter = new ResultPresenter();
+
+            if (currentText) {
+                await presenter.postPredictions(currentText);
+            }
+
             this.stopDetection();
             window.location.hash = '#/dashboard';
         });

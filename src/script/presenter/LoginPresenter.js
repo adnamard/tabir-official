@@ -1,44 +1,43 @@
-import TabirIdb from '../utils/db';
-
 const BASE_URL = process.env.API_BASE_URL;
 
 class LoginPresenter {
-    async login({ email, password }) {
+    async login({ username, password }) {
         try {
             const response = await fetch(`${BASE_URL}/authentications`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ username, password }),
             });
 
-            const data = await response.json();
+            const rawBody = await response.text();
+
+            let data;
+            try {
+                data = JSON.parse(rawBody);
+            } catch (e) {
+                console.error('Response is not valid JSON');
+                throw new Error('Unexpected server response');
+            }
 
             switch (response.status) {
-                case 200:
-                    await TabirIdb.putUserData({
-                        id: 'currentUser',
-                        email: email,
-                        token: data.token,
-                    });
+                case 201:
+                    localStorage.setItem('auth_token', data.data.accessToken);
                     window.location.hash = '#/dashboard';
-                    break;
+                    return true;
                 case 400:
-                    alert('Invalid email or password format');
-                    break;
+                    throw new Error('Format username atau password tidak valid');
                 case 401:
-                    alert('Invalid credentials');
-                    break;
+                    throw new Error('Kredensial tidak valid');
                 case 404:
-                    alert('User not found');
-                    break;
+                    throw new Error('Pengguna tidak ditemukan');
                 default:
-                    throw new Error('Server error');
+                    throw new Error('Terjadi kesalahan server');
             }
         } catch (error) {
             console.error('Login error:', error);
-            alert('Failed to login. Please check your connection and try again.');
+            throw error;
         }
     }
 }

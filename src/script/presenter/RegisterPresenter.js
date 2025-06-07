@@ -1,58 +1,40 @@
-import TabirIdb from '../utils/db';
-
 const BASE_URL = process.env.API_BASE_URL;
 
 class RegisterPresenter {
-    async register({ name, email, password }) {
+    async register({ fullname, username, password }) {
         try {
-            // First, register the user
-            const registerResponse = await fetch(`${BASE_URL}/users`, {
+            const response = await fetch(`${BASE_URL}/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, email, password }),
+                body: JSON.stringify({ fullname, username, password }),
             });
 
-            const registerData = await registerResponse.json();
+            const rawBody = await response.text();
 
-            switch (registerResponse.status) {
+            let data;
+            try {
+                data = JSON.parse(rawBody);
+            } catch (e) {
+                console.error('Response is not valid JSON');
+                throw new Error('Unexpected server response');
+            }
+
+            switch (response.status) {
                 case 201:
-                    // If registration successful, proceed with login
-                    const loginResponse = await fetch(`${BASE_URL}/authentications`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ email, password }),
-                    });
-
-                    const loginData = await loginResponse.json();
-
-                    if (loginResponse.status === 200) {
-                        await TabirIdb.putUserData({
-                            id: 'currentUser',
-                            email: email,
-                            name: name,
-                            token: loginData.token,
-                        });
-                        window.location.hash = '#/dashboard';
-                    } else {
-                        throw new Error('Login failed after registration');
-                    }
-                    break;
+                    window.location.hash = '#login';
+                    return true;
                 case 400:
-                    alert('Invalid registration data. Please check your inputs.');
-                    break;
+                    throw new Error('Data registrasi tidak valid. Harap periksa masukan Anda.');
                 case 409:
-                    alert('Email already exists');
-                    break;
+                    throw new Error('Username sudah ada');
                 default:
-                    throw new Error('Server error during registration');
+                    throw new Error('Terjadi kesalahan server');
             }
         } catch (error) {
             console.error('Registration error:', error);
-            alert('Failed to register. Please check your connection and try again.');
+            throw error;
         }
     }
 }
