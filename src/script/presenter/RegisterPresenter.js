@@ -23,7 +23,6 @@ class RegisterPresenter {
 
             switch (response.status) {
                 case 201:
-                    window.location.hash = '#login';
                     return true;
                 case 400:
                     throw new Error('Data registrasi tidak valid. Harap periksa masukan Anda.');

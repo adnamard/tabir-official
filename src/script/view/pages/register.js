@@ -96,6 +96,8 @@ const Register = {
             icon: 'success',
             timer: 2000,
             showConfirmButton: false,
+          }).then(() => {
+            window.location.hash = '#/login';
           });
         }
       } catch (error) {
